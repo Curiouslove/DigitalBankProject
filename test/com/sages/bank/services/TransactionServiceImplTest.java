@@ -40,4 +40,28 @@ class TransactionServiceImplTest {
         }
     }
 
+    @Test
+    void addTransactionWithNegativeCredit(){
+        Account johnSavings = new SavingsAccount(BigDecimal.valueOf(10000));
+        assertEquals(10000,johnSavings.getBalance().intValue());
+        Transaction initialDeposit = new Transaction(BigDecimal.valueOf(-5000), TransactionType.CREDIT);
+        assertThrows(SageBankTransactionException.class,
+                ()->tx.addTransaction(johnSavings,initialDeposit));
+    }
+
+    @Test
+    void addTransactionWithLargeCredit(){
+        BigDecimal largeNumber = new BigDecimal("1000000000000000");
+        Account johnSavings = new SavingsAccount(largeNumber);
+        assertEquals(largeNumber,johnSavings.getBalance());
+        Transaction initialDeposit = new Transaction(largeNumber, TransactionType.CREDIT);
+
+        try {
+            BigDecimal newBalance = tx.addTransaction(johnSavings,initialDeposit);
+            assertEquals(newBalance, johnSavings.getBalance());
+        } catch (SageBankTransactionException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
