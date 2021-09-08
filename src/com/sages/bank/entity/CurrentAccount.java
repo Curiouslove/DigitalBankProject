@@ -1,2 +1,4 @@
-package com.sages.bank.entity;public class CurrentAccount {
+package com.sages.bank.entity;
+
+public class CurrentAccount extends Account{
 }

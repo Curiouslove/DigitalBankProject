@@ -1,2 +1,4 @@
-package com.sages.bank.exceptions;public class SageBankTransactionException {
+package com.sages.bank.exceptions;
+
+public class SageBankTransactionException extends SageBankException{
 }

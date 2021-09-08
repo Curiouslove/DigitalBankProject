@@ -1,2 +1,5 @@
-package com.sages.bank.enums;public enum TransactionType {
+package com.sages.bank.enums;
+
+public enum TransactionType {
+    CREDIT, DEBIT;
 }

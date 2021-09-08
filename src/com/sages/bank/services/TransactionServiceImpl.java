@@ -1,2 +1,19 @@
-package com.sages.bank.services;public class TransactionServiceImpl {
+package com.sages.bank.services;
+
+import com.sages.bank.entity.Account;
+import com.sages.bank.entity.Transaction;
+import com.sages.bank.enums.TransactionType;
+import com.sages.bank.exceptions.SageBankTransactionException;
+
+import java.math.BigDecimal;
+
+public class TransactionServiceImpl implements TransactionService{
+    public BigDecimal addTransaction(Account account, Transaction tx) throws SageBankTransactionException{
+        BigDecimal newBalance = null;
+        if(tx.getType().equals(TransactionType.CREDIT)){
+            newBalance = account.getBalance().add(tx.getAmount());
+            account.setBalance(newBalance);
+        }
+        return newBalance;
+    }
 }
